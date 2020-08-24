@@ -1,0 +1,1 @@
+{"source":"(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{109:function(n,e,o){n.exports={box:\"index_2fdhM_box\"}},112:function(n,e,o){\"use strict\";o.r(e);var a=o(0),t=o.n(a),c=o(109),i=o.n(c);e.default=function(){return t.a.createElement(\"div\",{className:i.a.box},\"Home page1\")}}}]);"}
