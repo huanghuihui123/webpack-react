@@ -3,9 +3,7 @@ import styles from './index.less'
 import { RouteComponentProps } from 'react-router-dom'
 
 
-interface Props extends RouteComponentProps {
-
-}
+type Props = RouteComponentProps
 
 const Login: React.FC<Props> = ({ history }) => {
 
