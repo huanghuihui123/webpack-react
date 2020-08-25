@@ -560,3 +560,60 @@ module.exports = {
 ```
 
 ### eslint 配置
+* 安装 eslint
+```
+npm install eslint --save-dev
+```
+* 生成配置文件
+```
+./node_modules/.bin/eslint --init
+```
+* 添加规则
+```
+module.exports = {
+    'env': {
+        'browser': true,
+        'es2020': true,
+        'node': true
+    },
+    'extends': [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended'
+    ],
+    'parser': '@typescript-eslint/parser',
+    'parserOptions': {
+        'ecmaFeatures': {
+            'jsx': true
+        },
+        'ecmaVersion': 12,
+        'sourceType': 'module'
+    },
+    'plugins': [
+        'react',
+        '@typescript-eslint'
+    ],
+    'rules': {
+        'quotes': ['error', 'single'], // here
+        'semi': ['error', 'never'],
+        'react/prop-types': 0
+    }
+}
+```
+
+* 检查 Git 提交的代码
+```
+npm install pre-commit --save-dev
+```
+
+* 在 package.json 添加以下命令: 
+```
+"scripts": {
+    "lint": "eslint --ext .tsx,.ts,.js src/  --fix ./src --cache",
+},
+...
+
+"pre-commit": [
+    "lint"
+]
+```
