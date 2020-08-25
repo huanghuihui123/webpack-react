@@ -78,19 +78,20 @@ code-js: JavaScript标准库的polyfill (promise，symbols等)。
 regenerator-runtime: 当使用 generators/async 函数时，需要引入该插件。
 
 ```
-// 公共 bable 配置
-const babelOptions = {
-    presets: [
-        [
-            '@babel/preset-env',
-            {
-                // 根据源码和target 自动引入polyfill，此时不需要在app入口引入 polyfill
-                useBuiltIns: 'usage',
-                corejs: 3,
-            }
-        ]
-    ],
-    cacheDirectory: true
+// .babelrc
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ]
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import"
+  ]
 }
 
 module.exports = {
@@ -100,10 +101,7 @@ module.exports = {
             {
                 test: /\.js(x?)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: babelOptions
-                }
+                use: ['babel-loader']
             }
         ]
     }
@@ -421,13 +419,7 @@ module.exports = {
             {
                 test: /\.ts(x?)$/,
                 exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: babelOptions
-                    },
-                    'ts-loader'
-                ]
+                use: ['babel-loader','ts-loader']
             },
             ...
         ]
@@ -559,12 +551,7 @@ module.exports = {
         new HappyPack({
             // id 标识符，要和 rules 中指定的 id 对应起来
             id: 'babel',
-            loaders: [
-                {
-                    loader: 'babel-loader',
-                    options: babelOptions
-                }
-            ],
+            loaders: ['babel-loader?cacheDirectory=true'],
             threadPool: happyThreadPool
         }),
     ]

@@ -4,7 +4,7 @@ const webpack = require('webpack')
 module.exports = {
     // 第三方模块
     entry: {
-        vendor: ['react', 'react-dom', 'react-router-dom', 'core-js', 'regenerator-runtime']
+        vendor: ['react', 'react-dom', 'react-router-dom']
     },
     output: {
         path: path.resolve(__dirname, '../dll'), // 打包后文件输出的位置

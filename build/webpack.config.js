@@ -15,23 +15,6 @@ console.log(process.env.NODE_ENV)
 const isDevMode = process.env.NODE_ENV === 'development'
 console.log(isDevMode)
 
-console.log(path.resolve(__dirname, '../src/assets'))
-
-const babelOptions = {
-    presets: [
-        [
-            '@babel/preset-env',
-            {
-                // 根据源码和target 自动引入polyfill，此时不需要在app入口引入 polyfill
-                useBuiltIns: 'usage',
-                corejs: 3
-            }
-        ]
-    ],
-    cacheDirectory: true,
-    plugins: ["@babel/plugin-syntax-dynamic-import"]
-}
-
 const MiniCssExtractPluginLoader = {
     loader: MiniCssExtractPlugin.loader,
     options: {
@@ -192,12 +175,7 @@ module.exports = {
         new HappyPack({
             // id 标识符，要和 rules 中指定的 id 对应起来
             id: 'babel',
-            loaders: [
-                {
-                    loader: 'babel-loader',
-                    options: babelOptions
-                }
-            ],
+            loaders: ['babel-loader?cacheDirectory=true'],
             threadPool: happyThreadPool
         }),
     ],
